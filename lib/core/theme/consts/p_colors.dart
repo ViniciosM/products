@@ -8,7 +8,7 @@ class PColors {
   static const Color neutralColor = Color(0XFFEBF2FA);
 
   // BASIC
-  static const Color white = Color(0xFFF0F6F5);
+  static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color grey = Color(0xFF888888);
   static const Color errorColor = Color(0XFFA61C3C);

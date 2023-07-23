@@ -6,7 +6,7 @@ class AppConfigUI {
   AppConfigUI._();
 
   static final ThemeData theme = ThemeData(
-    useMaterial3: true,
+    useMaterial3: false,
     scaffoldBackgroundColor: PColors.white,
     textTheme: TextTheme(bodyMedium: GoogleFonts.poppins(fontSize: 15)),
     //brightness: Brightness.dark,

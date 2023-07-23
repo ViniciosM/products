@@ -6,6 +6,8 @@ import 'package:products/data/repositories/product_repository_impl.dart';
 import 'package:products/domain/repositories/product_repository.dart';
 import 'package:products/domain/usecases/get_products_usecase.dart';
 import 'package:products/domain/usecases/get_products_usecase_impl.dart';
+import 'package:products/domain/usecases/search_products_usecase.dart';
+import 'package:products/domain/usecases/search_products_usecase_impl.dart';
 import 'package:products/presentation/product/controllers/product_controller.dart';
 import 'package:products/presentation/product/product_module.dart';
 import 'package:products/presentation/splash/splash_page.dart';
@@ -19,11 +21,13 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => Dio()),
 
     // CONTROLLER
-    Bind.lazySingleton((i) => ProductController(i())),
+    Bind.lazySingleton((i) => ProductController(i(), i())),
 
     // USECASES
     Bind.lazySingleton<GetProductsUseCase>(
         (i) => GetProductsUseCaseImpl(productRepository: i())),
+    Bind.lazySingleton<SearchProductsUseCase>(
+        (i) => SearchProductsUseCaseImpl(productRepository: i())),
 
     // REPOSITORIES
     Bind.lazySingleton<ProductRepository>(

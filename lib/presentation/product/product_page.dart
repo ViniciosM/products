@@ -59,57 +59,66 @@ class _ProductPageState extends State<ProductPage> {
               icon: const Icon(Icons.favorite_border_outlined))
         ],
       ),
-      body: ListenableBuilder(
-        listenable: productState,
-        builder: (context, child) {
-          return switch (productState.value) {
-            StartProductState _ => const SizedBox.shrink(),
-            LoadingProductState _ => const Center(
-                child: PCircularProgressIndicator(),
-              ),
-            GettedProductState state => Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: PSizes.padding20,
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: PSizes.size10,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: PSizes.size20),
+        child: Column(
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: PSizes.size10,
+            ),
+            SearchFormField(
+                controller: _searchEC,
+                onChanged: (text) async {
+                  Future.delayed(const Duration(seconds: 1), () {
+                    productController.search(text: text);
+                  });
+                },
+                onSubmitted: (text) {}),
+            const SizedBox(
+              height: PSizes.size20,
+            ),
+            ListenableBuilder(
+              listenable: productState,
+              builder: (context, child) {
+                return switch (productState.value) {
+                  StartProductState _ => const SizedBox.shrink(),
+                  LoadingProductState _ => const Expanded(
+                      child: Center(
+                        child: PCircularProgressIndicator(),
+                      ),
                     ),
-                    SearchFormField(
-                        controller: _searchEC,
-                        onChanged: (text) {},
-                        onSubmitted: (text) {}),
-                    Expanded(child: _gettedProducts(state)),
-                  ],
-                ),
-              ),
-            FailureProductState state => _failure(state),
-          };
-        },
+                  GettedProductState state => _gettedProducts(state),
+                  FailureProductState state => _failure(state),
+                };
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _gettedProducts(GettedProductState state) {
     final products = state.products;
-    return ListView.builder(
-      controller: _scrollController,
-      itemCount: products.length,
-      itemBuilder: (_, index) {
-        final product = products[index];
-        return Visibility(
-          visible: products.isNotEmpty,
-          replacement: const EmptyList(),
-          child: InkWell(
-            onTap: () {
-              Modular.to.pushNamed('/product/details',
-                  arguments: ProductDTO.fromEntity(product));
-            },
-            child: ProductCard(product: ProductDTO.fromEntity(product)),
-          ),
-        );
-      },
+    return Expanded(
+      child: ListView.builder(
+        controller: _scrollController,
+        itemCount: products.length,
+        itemBuilder: (_, index) {
+          final product = products[index];
+          return products.isNotEmpty
+              ? InkWell(
+                  onTap: () {
+                    Modular.to.pushNamed('/product/details',
+                        arguments: ProductDTO.fromEntity(product));
+                  },
+                  child: ProductCard(product: ProductDTO.fromEntity(product)),
+                )
+              : const EmptyList();
+        },
+      ),
     );
   }
 

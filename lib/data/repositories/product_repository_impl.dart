@@ -15,4 +15,10 @@ class ProductRepositoryImpl implements ProductRepository {
     List<ProductDTO> products = await productDatasource.getProducts();
     return ProductDTO.toEntityFromList(products);
   }
+
+  @override
+  Future<List<ProductEntity>> search({required String text}) async {
+    List<ProductDTO> products = await productDatasource.search(text: text);
+    return ProductDTO.toEntityFromList(products);
+  }
 }
