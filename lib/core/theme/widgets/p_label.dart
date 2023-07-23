@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../consts/p_colors.dart';
 
-class StokiLabel extends StatelessWidget {
-  const StokiLabel(
+class PLabel extends StatelessWidget {
+  const PLabel(
       {required this.text,
       this.color = PColors.black,
       this.fontSize = 15,
@@ -27,7 +27,7 @@ class StokiLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.rubik(
+      style: GoogleFonts.poppins(
         fontSize: fontSize,
         fontWeight: fontWeight,
         color: color,

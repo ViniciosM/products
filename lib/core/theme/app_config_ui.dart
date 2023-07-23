@@ -7,28 +7,28 @@ class AppConfigUI {
 
   static final ThemeData theme = ThemeData(
     useMaterial3: true,
-    scaffoldBackgroundColor: PColors.neutralColor,
-    textTheme: TextTheme(bodyMedium: GoogleFonts.rubik(fontSize: 15)),
+    scaffoldBackgroundColor: PColors.white,
+    textTheme: TextTheme(bodyMedium: GoogleFonts.poppins(fontSize: 15)),
     //brightness: Brightness.dark,
     appBarTheme: const AppBarTheme(
-      centerTitle: true,
+      centerTitle: false,
       elevation: 0.0,
       actionsIconTheme: IconThemeData(
-        color: PColors.white,
+        color: PColors.black,
       ),
       iconTheme: IconThemeData(
-        color: PColors.white,
+        color: PColors.black,
       ),
-      backgroundColor: PColors.secondColor,
+      backgroundColor: PColors.white,
     ),
     iconTheme: const IconThemeData(color: PColors.white),
     primaryIconTheme: const IconThemeData(color: PColors.white),
-    fontFamily: 'Rubik',
+    fontFamily: 'Poppins',
 
     colorSchemeSeed: PColors.primaryColor,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: OutlinedButton.styleFrom(
-          textStyle: GoogleFonts.rubik(
+          textStyle: GoogleFonts.poppins(
               letterSpacing: 0.35,
               fontSize: 16,
               color: PColors.neutralColor,
@@ -43,7 +43,7 @@ class AppConfigUI {
 
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-          textStyle: GoogleFonts.rubik(
+          textStyle: GoogleFonts.poppins(
               letterSpacing: 0.35,
               fontSize: 16,
               color: PColors.black,
@@ -56,8 +56,8 @@ class AppConfigUI {
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: PColors.black, selectionColor: PColors.black),
     inputDecorationTheme: InputDecorationTheme(
-      prefixStyle: GoogleFonts.rubik(color: PColors.black, fontSize: 15),
-      hintStyle: GoogleFonts.rubik(color: PColors.black, fontSize: 15),
+      prefixStyle: GoogleFonts.poppins(color: PColors.black, fontSize: 15),
+      hintStyle: GoogleFonts.poppins(color: PColors.black, fontSize: 15),
       border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
         borderSide: BorderSide(color: PColors.secondColor),

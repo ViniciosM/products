@@ -52,12 +52,8 @@ class ProductDTO {
         rating: RatingDTO.fromJson(json["rating"]),
       );
 
-  static List<ProductDTO> listFromJson(List jsonList) {
-    // List<ProductDTO> products =
-    //     (json as List).map((product) => ProductDTO.fromJson(product)).toList();
-    List<ProductDTO> products =
-        jsonList.map((product) => ProductDTO.fromJson(product)).toList();
-    return products;
+  static List<ProductDTO> responseToListObject(List jsonList) {
+    return jsonList.map((product) => ProductDTO.fromJson(product)).toList();
   }
 
   Map<String, dynamic> toJson() => {
