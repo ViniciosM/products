@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:products/core/shared/components/rating_product.dart';
 import 'package:products/core/theme/consts/p_colors.dart';
 import 'package:products/core/theme/consts/p_sizes.dart';
 import 'package:products/core/theme/widgets/p_label.dart';
 import 'package:products/data/dtos/product_dto.dart';
+import 'package:products/presentation/favorites/controllers/favorites_controller.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({required this.product, super.key});
@@ -46,7 +48,10 @@ class ProductCard extends StatelessWidget {
                       rating: product.rating,
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await Modular.get<FavoritesController>()
+                              .addToFavorites(productDTO: product);
+                        },
                         icon: const Icon(
                           Icons.favorite,
                           color: Colors.red,

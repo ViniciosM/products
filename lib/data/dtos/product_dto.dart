@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:products/data/dtos/rating_dto.dart';
 import 'package:products/domain/entities/product_entity.dart';
@@ -52,6 +51,9 @@ class ProductDTO {
         rating: RatingDTO.fromJson(json["rating"]),
       );
 
+  factory ProductDTO.stringToObject(String source) =>
+      ProductDTO.fromJson(json.decode(source));
+
   static List<ProductDTO> responseToListObject(List jsonList) {
     return jsonList.map((product) => ProductDTO.fromJson(product)).toList();
   }
@@ -90,5 +92,16 @@ class ProductDTO {
         category: category,
         image: image,
         rating: RatingDTO.toEntity(rating));
+  }
+
+  static ProductEntity entityToDTO(ProductDTO productDTO) {
+    return ProductEntity(
+        id: productDTO.id,
+        title: productDTO.title,
+        price: productDTO.price,
+        description: productDTO.description,
+        category: productDTO.category,
+        image: productDTO.image,
+        rating: RatingDTO.toEntity(productDTO.rating));
   }
 }

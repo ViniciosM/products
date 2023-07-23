@@ -19,6 +19,7 @@ class ProductPage extends StatefulWidget {
   State<ProductPage> createState() => _ProductPageState();
 }
 
+GlobalKey _key = GlobalKey();
 ScrollController _scrollController = ScrollController();
 late TextEditingController _searchEC;
 
@@ -45,6 +46,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         title: const PLabel(
           text: 'Products',

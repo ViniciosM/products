@@ -9,11 +9,17 @@ class SomethingWrong extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset('assets/images/something_wrong.png'),
+        Image.asset(
+          'assets/images/something_wrong.png',
+          height: 200,
+        ),
         const SizedBox(
           height: PSizes.padding20,
         ),
-        const PLabel(text: 'Something went wrong!'),
+        const PLabel(
+          text: 'Something went wrong!',
+          fontSize: 17,
+        ),
       ],
     );
   }

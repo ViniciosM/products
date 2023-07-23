@@ -21,4 +21,16 @@ class ProductRepositoryImpl implements ProductRepository {
     List<ProductDTO> products = await productDatasource.search(text: text);
     return ProductDTO.toEntityFromList(products);
   }
+
+  @override
+  Future<void> addToFavorites({required ProductEntity productEntity}) async {
+    await productDatasource.addToFavorites(
+        productDTO: ProductDTO.fromEntity(productEntity));
+  }
+
+  @override
+  Future<List<ProductEntity>> getFavorites() async {
+    List<ProductDTO> products = await productDatasource.getFavorites();
+    return ProductDTO.toEntityFromList(products);
+  }
 }
