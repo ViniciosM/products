@@ -41,7 +41,7 @@ class ProductDTO {
         rating: rating ?? this.rating,
       );
 
-  factory ProductDTO.fromJson(Map<String, dynamic> json) => ProductDTO(
+  factory ProductDTO.fromJson(Map json) => ProductDTO(
         id: json["id"],
         title: json["title"],
         price: json["price"]?.toDouble(),
@@ -51,8 +51,17 @@ class ProductDTO {
         rating: RatingDTO.fromJson(json["rating"]),
       );
 
+  ProductDTO.fromMap(Map map)
+      : id = map['id'],
+        title = map['title'],
+        price = map['price'],
+        description = map['description'],
+        category = map['category'],
+        image = map['image'],
+        rating = RatingDTO.fromJson(map['rating']);
+
   factory ProductDTO.stringToObject(String source) =>
-      ProductDTO.fromJson(json.decode(source));
+      ProductDTO.fromJson(jsonDecode(source));
 
   static List<ProductDTO> responseToListObject(List jsonList) {
     return jsonList.map((product) => ProductDTO.fromJson(product)).toList();
@@ -103,5 +112,23 @@ class ProductDTO {
         category: productDTO.category,
         image: productDTO.image,
         rating: RatingDTO.toEntity(productDTO.rating));
+  }
+
+  static ProductDTO decodeProductFromJson(String stringProduct) {
+    final Map<String, dynamic> productMap = jsonDecode(stringProduct);
+    final RatingDTO rating = RatingDTO(
+      rate: productMap['rating']['rate'],
+      count: productMap['rating']['count'],
+    );
+
+    return ProductDTO(
+      id: productMap['id'],
+      title: productMap['title'],
+      price: productMap['price'],
+      description: productMap['description'],
+      category: productMap['category'],
+      image: productMap['image'],
+      rating: rating,
+    );
   }
 }

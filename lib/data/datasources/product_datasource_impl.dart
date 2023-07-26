@@ -50,11 +50,21 @@ class ProductDatasourceImpl implements ProductDatasource {
   @override
   Future<void> addToFavorites({required ProductDTO productDTO}) async {
     try {
-      List<String> jsonStringList = [];
       SharedPreferences localStorage = await SharedPreferences.getInstance();
-      String stringProduct = productDTO.toJson().toString();
-      jsonStringList.add(stringProduct);
-      localStorage.setStringList(Keys.favorites, jsonStringList);
+      List<ProductDTO> favorites = await getFavorites();
+      favorites.add(productDTO);
+
+      List<String>? favoritesStringList =
+          favorites.map((product) => product.toString()).toList();
+
+      // List<String> favoritesString =
+      //     favorites.map((prod) => prod.toJson().toString()).toList();
+
+      // String stringProduct = productDTO.toJson().toString();
+      log("PRODUCT LIST STRING -> $favoritesStringList");
+
+      // jsonStringList.add(stringProduct);
+      localStorage.setStringList(Keys.favorites, favoritesStringList);
     } catch (e, s) {
       log('[DATASOURCE] Add To Favorites - Error: $e | Stacktrace $s');
       throw Exception('Failed to add to favorites');
@@ -65,18 +75,72 @@ class ProductDatasourceImpl implements ProductDatasource {
   Future<List<ProductDTO>> getFavorites() async {
     try {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
-      List<ProductDTO> favorites = [];
-      List<String>? jsonStringList = localStorage.getStringList(Keys.favorites);
+      //List<ProductDTO> favorites = [];
+      List<String>? favoritesJsonList =
+          localStorage.getStringList(Keys.favorites);
 
-      if (jsonStringList != null) {
-        favorites = jsonStringList
-            .map((productString) => ProductDTO.stringToObject(productString))
-            .toList();
+      if (favoritesJsonList == null || favoritesJsonList.isEmpty) {
+        return [];
       }
+
+      var favorites = favoritesJsonList
+          .map((stringProduct) =>
+              ProductDTO.decodeProductFromJson(stringProduct))
+          .toList();
+
+      log("FAVORITES GETFAVORITES -> $favorites");
+
       return favorites;
     } catch (e, s) {
       log('[DATASOURCE] Get Favorites - Error: $e | Stacktrace $s');
       throw Exception('Failed to get favorites');
     }
   }
+
+  // @override
+  // Future<void> addToFavorites({required ProductDTO productDTO}) async {
+  //   try {
+  //     SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //     List<ProductDTO> favorites = await getFavorites();
+  //     favorites.add(productDTO);
+
+  //     List<String>? favoritesStringList =
+  //         favorites.map((product) => product.toString()).toList();
+
+  //     // List<String> favoritesString =
+  //     //     favorites.map((prod) => prod.toJson().toString()).toList();
+
+  //     // String stringProduct = productDTO.toJson().toString();
+  //     log("PRODUCT LIST STRING -> $favoritesStringList");
+
+  //     // jsonStringList.add(stringProduct);
+  //     localStorage.setStringList(Keys.favorites, favoritesStringList);
+  //   } catch (e, s) {
+  //     log('[DATASOURCE] Add To Favorites - Error: $e | Stacktrace $s');
+  //     throw Exception('Failed to add to favorites');
+  //   }
+  // }
+
+  // @override
+  // Future<List<ProductDTO>> getFavorites() async {
+  //   try {
+  //     SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //     List<ProductDTO> favorites = [];
+  //     List<String>? jsonStringList = localStorage.getStringList(Keys.favorites);
+
+  //     if (jsonStringList != null && jsonStringList.isNotEmpty) {
+  //       favorites = jsonStringList
+  //           .map((productString) =>
+  //               ProductDTO.fromMap(jsonDecode(productString)))
+  //           .toList();
+  //     }
+
+  //     log("FAVORITES GETFAVORITES -> $favorites");
+
+  //     return favorites;
+  //   } catch (e, s) {
+  //     log('[DATASOURCE] Get Favorites - Error: $e | Stacktrace $s');
+  //     throw Exception('Failed to get favorites');
+  //   }
+  // }
 }
