@@ -41,7 +41,7 @@ class ProductDTO {
         rating: rating ?? this.rating,
       );
 
-  factory ProductDTO.fromJson(Map json) => ProductDTO(
+  factory ProductDTO.fromJson(Map<String, dynamic> json) => ProductDTO(
         id: json["id"],
         title: json["title"],
         price: json["price"]?.toDouble(),
