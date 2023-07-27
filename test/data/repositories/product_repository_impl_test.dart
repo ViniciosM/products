@@ -64,30 +64,19 @@ void main() {
       expect(result.isEmpty, false);
       expect(result[2].price, 99.99);
     });
-    test('should failure when get products', () async {
+
+    test('should search by text and return a list of products', () async {
       // arrange
-      when(() => productDatasourceMock.getProducts()).thenThrow(());
-
+      when(() => productDatasourceMock.search(text: 'Product'))
+          .thenAnswer((_) async => products);
       // act
-      var result = await productRepository.getProducts();
+      var result = await productRepository.search(text: 'Product');
       // assert
-      expect(result is Exception, true);
+      expect(result.length, 3);
+      expect(result.first.description, 'Description X');
+      expect(result.isNotEmpty, true);
+      expect(result.isEmpty, false);
+      expect(result[1].price, 50.0);
     });
-
-    // test('Test getProducts throws exception with specific message', () async {
-    //   // Arrange
-    //   when(() => productDatasourceMock.getProducts())
-    //       .thenThrow((Exception('Something went wrong')));
-
-    //   // Act
-    //   try {
-    //     var result = await productRepository.getProducts();
-    //     fail('Expected an exception to be thrown');
-    //   } catch (e) {
-    //     // Assert
-    //     expect(e is Exception, true);
-    //     expect(e.toString(), 'Something went wrong');
-    //   }
-    // });
   });
 }

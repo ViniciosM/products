@@ -49,8 +49,8 @@ class ProductCard extends StatelessWidget {
                     ),
                     IconButton(
                         onPressed: () async {
-                          await Modular.get<FavoritesController>()
-                              .addToFavorites(productDTO: product);
+                          // await Modular.get<FavoritesController>()
+                          //     .addToFavorites(productDTO: product);
                         },
                         icon: const Icon(
                           Icons.favorite,
