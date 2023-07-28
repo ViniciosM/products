@@ -131,4 +131,20 @@ class ProductDTO {
       rating: rating,
     );
   }
+
+  static ProductDTO fromString(String jsonString) {
+    final Map<String, dynamic> data = json.decode(jsonString);
+    return ProductDTO(
+      id: data['id'],
+      title: data['title'],
+      price: data['price'].toDouble(),
+      description: data['description'],
+      category: data['category'],
+      image: data['image'],
+      rating: RatingDTO(
+        rate: data['rating']['rate'].toDouble(),
+        count: data['rating']['count'],
+      ),
+    );
+  }
 }

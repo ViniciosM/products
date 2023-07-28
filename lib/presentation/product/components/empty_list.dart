@@ -9,11 +9,18 @@ class EmptyList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset('assets/images/empty.png'),
-        const SizedBox(
-          height: PSizes.padding20,
+        Image.asset(
+          'assets/images/empty.png',
+          height: 200,
         ),
-        const PLabel(text: 'This list is empty'),
+        const SizedBox(
+          height: PSizes.padding12,
+        ),
+        const PLabel(
+          text: 'This list is empty',
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
       ],
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:products/core/shared/components/product_card.dart';
 import 'package:products/core/shared/components/something_wrong.dart';
+import 'package:products/core/theme/consts/p_colors.dart';
 import 'package:products/core/theme/consts/p_sizes.dart';
 import 'package:products/core/theme/widgets/p_circular_progress_indicator.dart';
 import 'package:products/core/theme/widgets/p_label.dart';
@@ -51,7 +52,8 @@ class _ProductPageState extends State<ProductPage> {
         title: const PLabel(
           text: 'Products',
           fontSize: 20,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
+          color: PColors.darkColor,
         ),
         actions: [
           IconButton(
@@ -76,6 +78,11 @@ class _ProductPageState extends State<ProductPage> {
                   Future.delayed(const Duration(seconds: 1), () {
                     productController.search(text: text);
                   });
+                },
+                onClosed: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  productController.search(text: '');
+                  _searchEC.text = '';
                 },
                 onSubmitted: (text) {}),
             const SizedBox(

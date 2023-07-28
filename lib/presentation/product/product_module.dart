@@ -4,7 +4,7 @@ import 'package:products/presentation/favorites/favorites_page.dart';
 import 'package:products/presentation/product/controllers/product_controller.dart';
 import 'package:products/presentation/product/product_page.dart';
 
-import '../product_details/product_detail_page.dart';
+import '../product_details/product_details_page.dart';
 
 class ProductModule extends Module {
   @override

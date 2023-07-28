@@ -25,11 +25,11 @@ class ProductCard extends StatelessWidget {
             flex: 1,
             child: Image.network(
               product.image,
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(
-            width: PSizes.size12,
+            width: PSizes.size20,
           ),
           Expanded(
             flex: 2,
@@ -40,6 +40,8 @@ class ProductCard extends StatelessWidget {
                 PLabel(
                   text: product.title,
                   maxLines: 3,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,19 +51,20 @@ class ProductCard extends StatelessWidget {
                     ),
                     IconButton(
                         onPressed: () async {
-                          // await Modular.get<FavoritesController>()
-                          //     .addToFavorites(productDTO: product);
+                          await Modular.get<FavoritesController>()
+                              .addToFavorites(productDTO: product);
                         },
                         icon: const Icon(
                           Icons.favorite,
-                          color: Colors.red,
+                          color: PColors.red,
                         )),
                   ],
                 ),
                 PLabel(
                   text: '\$${product.price}',
-                  fontSize: 18,
-                  color: Colors.orangeAccent,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: PColors.orange,
                 ),
               ],
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:products/core/theme/consts/p_sizes.dart';
 import 'package:products/data/dtos/rating_dto.dart';
 
+import '../../theme/consts/p_colors.dart';
 import '../../theme/widgets/p_label.dart';
 
 class RatingProduct extends StatelessWidget {
@@ -15,12 +16,18 @@ class RatingProduct extends StatelessWidget {
       children: [
         const Icon(
           Icons.star,
-          color: Colors.yellow,
+          color: PColors.yellow,
+          size: 25,
         ),
         const SizedBox(
           width: PSizes.size8,
         ),
-        PLabel(text: '${rating.rate} (${rating.count} reviews)'),
+        PLabel(
+          text: '${rating.rate} (${rating.count} reviews)',
+          fontWeight: FontWeight.w600,
+          fontSize: 14,
+          color: PColors.greyBold,
+        ),
       ],
     );
   }

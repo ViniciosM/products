@@ -18,7 +18,7 @@ class ProductDetailsPage extends StatelessWidget {
         title: const PLabel(
           text: 'Product Details',
           fontSize: 20,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
         ),
         actions: [
           IconButton(
@@ -59,9 +59,9 @@ class ProductDetailsPage extends StatelessWidget {
                   ),
                   PLabel(
                     text: '\$${product.price}',
-                    fontSize: 21,
-                    color: Colors.green,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    color: PColors.green,
+                    fontWeight: FontWeight.w700,
                   )
                 ],
               ),
@@ -84,12 +84,15 @@ class ProductDetailsPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Icon(Icons.bar_chart_sharp, color: PColors.darkColor),
+        const Icon(Icons.sort, color: PColors.darkColor),
         const SizedBox(
           width: PSizes.padding8,
         ),
         PLabel(
           text: category,
+          letterSpacing: 0.6,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
         ),
       ],
     );
@@ -100,13 +103,16 @@ class ProductDetailsPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Icon(Icons.abc_sharp, color: PColors.darkColor),
+        const Icon(Icons.menu, color: PColors.darkColor),
         const SizedBox(
           width: PSizes.padding8,
         ),
         Expanded(
           child: PLabel(
             text: description,
+            letterSpacing: 0.6,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
             maxLines: 15,
             textOverflow: TextOverflow.ellipsis,
             textAlign: TextAlign.justify,

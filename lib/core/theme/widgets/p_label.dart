@@ -5,7 +5,7 @@ import '../consts/p_colors.dart';
 class PLabel extends StatelessWidget {
   const PLabel(
       {required this.text,
-      this.color = PColors.black,
+      this.color = PColors.primaryColor,
       this.fontSize = 15,
       this.fontWeight = FontWeight.w400,
       this.maxLines = 1,

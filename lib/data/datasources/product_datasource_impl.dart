@@ -51,20 +51,24 @@ class ProductDatasourceImpl implements ProductDatasource {
   Future<void> addToFavorites({required ProductDTO productDTO}) async {
     try {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
-      List<ProductDTO> favorites = await getFavorites();
-      favorites.add(productDTO);
+      //List<ProductDTO> favorites = await getFavorites();
+      //favorites.add(productDTO);
 
-      List<String>? favoritesStringList =
-          favorites.map((product) => product.toString()).toList();
+      // List<String>? favoritesStringList =
+      //     favorites.map((product) => product.toString()).toList();
 
       // List<String> favoritesString =
       //     favorites.map((prod) => prod.toJson().toString()).toList();
+      String productString = productDTO.toJson().toString();
+      log(productString);
 
       // String stringProduct = productDTO.toJson().toString();
-      log("PRODUCT LIST STRING -> $favoritesStringList");
+      //log("PRODUCT LIST STRING -> $favoritesStringList");
 
       // jsonStringList.add(stringProduct);
-      localStorage.setStringList(Keys.favorites, favoritesStringList);
+      //localStorage.setStringList(Keys.favorites, favoritesStringList);
+      localStorage.setString('favorites', productString);
+      log(' SAVED ');
     } catch (e, s) {
       log('[DATASOURCE] Add To Favorites - Error: $e | Stacktrace $s');
       throw Exception('Failed to add to favorites');
@@ -75,18 +79,24 @@ class ProductDatasourceImpl implements ProductDatasource {
   Future<List<ProductDTO>> getFavorites() async {
     try {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
-      //List<ProductDTO> favorites = [];
-      List<String>? favoritesJsonList =
-          localStorage.getStringList(Keys.favorites);
+      List<ProductDTO> favorites = [];
+      String? favoritesJsonList = localStorage.getString('favorites');
 
       if (favoritesJsonList == null || favoritesJsonList.isEmpty) {
         return [];
       }
 
-      var favorites = favoritesJsonList
-          .map((stringProduct) =>
-              ProductDTO.decodeProductFromJson(stringProduct))
-          .toList();
+      log(favoritesJsonList);
+
+      var productDTO = ProductDTO.fromString(favoritesJsonList);
+
+      favorites.add(productDTO);
+      log('$productDTO');
+
+      // var favorites = favoritesJsonList
+      //     .map((stringProduct) =>
+      //         ProductDTO.decodeProductFromJson(stringProduct))
+      //     .toList();
 
       log("FAVORITES GETFAVORITES -> $favorites");
 
@@ -96,6 +106,32 @@ class ProductDatasourceImpl implements ProductDatasource {
       throw Exception('Failed to get favorites');
     }
   }
+
+  // @override
+  // Future<List<ProductDTO>> getFavorites() async {
+  //   try {
+  //     SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //     //List<ProductDTO> favorites = [];
+  //     List<String>? favoritesJsonList =
+  //         localStorage.getStringList(Keys.favorites);
+
+  //     if (favoritesJsonList == null || favoritesJsonList.isEmpty) {
+  //       return [];
+  //     }
+
+  //     var favorites = favoritesJsonList
+  //         .map((stringProduct) =>
+  //             ProductDTO.decodeProductFromJson(stringProduct))
+  //         .toList();
+
+  //     log("FAVORITES GETFAVORITES -> $favorites");
+
+  //     return favorites;
+  //   } catch (e, s) {
+  //     log('[DATASOURCE] Get Favorites - Error: $e | Stacktrace $s');
+  //     throw Exception('Failed to get favorites');
+  //   }
+  // }
 
   // @override
   // Future<void> addToFavorites({required ProductDTO productDTO}) async {

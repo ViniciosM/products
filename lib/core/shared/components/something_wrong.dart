@@ -14,11 +14,12 @@ class SomethingWrong extends StatelessWidget {
           height: 200,
         ),
         const SizedBox(
-          height: PSizes.padding20,
+          height: PSizes.padding12,
         ),
         const PLabel(
           text: 'Something went wrong!',
-          fontSize: 17,
+          fontSize: 16,
+          fontWeight: FontWeight.w700,
         ),
       ],
     );
