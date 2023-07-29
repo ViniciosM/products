@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:products/core/services/local_storage_service.dart';
 import 'package:products/data/datasources/product_datasource.dart';
 import 'package:products/data/datasources/product_datasource_impl.dart';
 import 'package:products/data/repositories/product_repository_impl.dart';
